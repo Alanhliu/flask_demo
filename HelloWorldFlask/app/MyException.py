@@ -1,0 +1,17 @@
+from flask import request, json
+from werkzeug.exceptions import HTTPException
+
+
+class MyException(HTTPException):
+    code = 500
+    msg = 'sorry, we make a mistake'
+    error_code = 999
+
+    def __init__(self, code=None, msg=None, error_code=None, header=None):
+        if code:
+            self.code = code
+        if msg:
+            self.msg = msg
+        if error_code:
+            self.error_code = error_code
+        super(MyException, self).__init__(msg, None)

@@ -3,7 +3,8 @@ import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
-class config:
+
+class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'this is a secret string'
     SQLALCHEMY_TRACK_MODIFICATIONS = True
 
@@ -12,19 +13,20 @@ class config:
         pass
 
 
-class DevelopmentConfig(config):
+class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
-                              'sqlite:///' + os.path.join(basedir, 'dev')
+    # SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
+    #                           'sqlite:///' + os.path.join(basedir, 'dev')
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://liuhao:123456@180.76.143.195:3306/test?charset=utf8'
 
 
-class TestingConfig(config):
+class TestingConfig(Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URL') or \
                               'sqlite:///' + os.path.join(basedir, 'test')
 
 
-class ProductionConfig(config):
+class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
                               'sqlite:///' + os.path.join(basedir, 'data.sqlite')
 
