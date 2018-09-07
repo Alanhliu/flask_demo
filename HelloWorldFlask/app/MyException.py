@@ -1,4 +1,4 @@
-from flask import request, json
+from flask import request, jsonify
 from werkzeug.exceptions import HTTPException
 
 
@@ -15,3 +15,12 @@ class MyException(HTTPException):
         if error_code:
             self.error_code = error_code
         super(MyException, self).__init__(msg, None)
+
+    def get_body(self, environ=None):
+        body = dict(
+            msg=self.msg,
+            error_code=self.error_code,
+            request=request.method + ' ' + self.get_url_no_param()
+        )
+
+        return jsonify(body)

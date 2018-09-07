@@ -23,6 +23,7 @@ def user_list():
         print(dict(user.__dict__))
         list.append(user.as_dict())
 
+    return jsonify(list)
     # response = make_response(jsonify(response=list))
     # response.headers['Access-Control-Allow-Origin'] = '*'
     # response.headers['Access-Control-Allow-Methods'] = 'POST'
@@ -30,8 +31,6 @@ def user_list():
     # return response
 
     # return jsonify(dict('response', list))
-    return jsonify(list)
-
 
 
 
